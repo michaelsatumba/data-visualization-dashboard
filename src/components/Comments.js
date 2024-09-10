@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const mockComments = [
-  { id: 1, text: 'To the moon!', responses: [] }
+  { id: 1, text: 'Solana to the moon!', responses: [] }
 ];
 
 const Comments = () => {
@@ -26,9 +26,9 @@ const Comments = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-4">
+    <div className="flex flex-col items-center justify-center w-3/4 h-3/4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center">Comments</h2>
-      <div className="mb-4">
+      <div className="mb-4 w-full max-w-2xl">
         <input
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
@@ -43,7 +43,7 @@ const Comments = () => {
           Submit
         </button>
       </div>
-      <ul>
+      <ul className="w-full max-w-2xl">
         {comments.map(comment => (
           <li key={comment.id} className="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
             <p className="text-gray-900 dark:text-gray-100">{comment.text}</p>
