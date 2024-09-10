@@ -22,7 +22,7 @@ const Chart = ({ theme }) => {
       },
     ],
   });
-  const [range, setRange] = useState(30); // State for selected data range (1 day, 7 days, 30 days, or 1 year)
+  const [range, setRange] = useState(1); // State for selected data range (1 day, 7 days, 30 days, or 1 year)
 
   useEffect(() => {
     const fetchData = async () => {
