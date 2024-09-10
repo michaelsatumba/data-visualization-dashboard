@@ -22,7 +22,7 @@ const Chart = ({ theme }) => {
       },
     ],
   });
-  const [range, setRange] = useState(30); // State for selected data range (1 day, 7 days, or 30 days)
+  const [range, setRange] = useState(30); // State for selected data range (1 day, 7 days, 30 days, or 1 year)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +31,7 @@ const Chart = ({ theme }) => {
         if (range === 1) return index % 2 === 0; // Filter for hourly data if range is 1 day
         if (range === 7) return true; // No filter for 7 days
         if (range === 30) return index % 24 === 0; // Filter for daily data if range is 30 days
+        if (range === 365) return index % 24 === 0; // Filter for daily data if range is 1 year
       });
       setData({
         labels: filteredData.map(item => range === 1 ? new Date(item.date).toLocaleTimeString() : new Date(item.date).toLocaleDateString()), // Format labels based on range
@@ -61,19 +62,25 @@ const Chart = ({ theme }) => {
           onClick={() => setRange(1)}
           className={`px-4 py-2 ${range === 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} rounded`}
         >
-          Past 24 Hours
+          24 Hours
         </button>
         <button
           onClick={() => setRange(7)}
           className={`px-4 py-2 ${range === 7 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} rounded`}
         >
-          Past 7 Days
+          7 Days
         </button>
         <button
           onClick={() => setRange(30)}
           className={`px-4 py-2 ${range === 30 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} rounded`}
         >
-          Past 30 Days
+          1 Month
+        </button>
+        <button
+          onClick={() => setRange(365)}
+          className={`px-4 py-2 ${range === 365 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} rounded`}
+        >
+          1 Year
         </button>
       </div>
       <div className={`rounded-lg p-4 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} shadow-md`}>
