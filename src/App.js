@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import './App.css';
-import PriceChart from './components/PriceChart';
-import TimeRangeSelector from './components/TimeRangeSelector';
+import { ThemeProvider, useTheme } from './ThemeContext';
+import './index.css';
+import ThemeToggle from './components/ThemeToggle';
+import Chart from './components/PriceChart'; 
 import Heatmap from './components/Heatmap';
 
-function App() {
-  const [timeRange, setTimeRange] = useState('24h');
 
-  const handleTimeRangeChange = (range) => {
-    setTimeRange(range);
-  };
+const AppContent = () => {
+  const { theme } = useTheme(); // Extract the current theme from the context
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="text-3xl font-bold underline">Solana Data Visualization Dashboard</h1>
-      </header>
-      <main>
-        <TimeRangeSelector onChange={handleTimeRangeChange} />
-        <PriceChart timeRange={timeRange} />
-        <Heatmap timeRange={timeRange} />
-      </main>
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-4">Data Visualization Dashboard</h1>
+        <ThemeToggle />
+        <Chart theme={theme} /> {/* Pass the current theme as a prop */}
+        <Heatmap />
+      </div>
     </div>
   );
-}
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+};
 
 export default App;
