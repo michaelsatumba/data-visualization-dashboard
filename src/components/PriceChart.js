@@ -1,5 +1,5 @@
+// src/components/PriceChart.js
 import React, { useEffect, useState, useRef } from 'react';
-import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import { fetchSolanaHistoricalData } from '../services/coinGeckoService';
 
@@ -9,11 +9,12 @@ Chart.register(...registerables);
 const PriceChart = ({ timeRange }) => {
   const [chartData, setChartData] = useState(null);
   const chartRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await fetchSolanaHistoricalData();
+        const data = await fetchSolanaHistoricalData(timeRange);
         console.log('Fetched data:', data); // Debugging: Log the fetched data
 
         // Extract prices and timestamps from the historical data
@@ -45,7 +46,7 @@ const PriceChart = ({ timeRange }) => {
     }
 
     if (chartData) {
-      const ctx = document.getElementById('priceChart').getContext('2d');
+      const ctx = canvasRef.current.getContext('2d');
       chartRef.current = new Chart(ctx, {
         type: 'line',
         data: chartData,
@@ -65,7 +66,7 @@ const PriceChart = ({ timeRange }) => {
     return <div>Loading...</div>;
   }
 
-  return <canvas id="priceChart"></canvas>;
+  return <canvas ref={canvasRef}></canvas>;
 };
 
 export default PriceChart;
