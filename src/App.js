@@ -4,6 +4,7 @@ import ThemeToggle from './components/ThemeToggle';
 import Chart from './components/PriceChart'; 
 import { ChevronDownIcon } from '@heroicons/react/solid'; 
 import TradingViewChart from './components/TradingViewChart';
+import Comments from './components/Comments'; 
 
 const AppContent = () => {
   const { theme } = useTheme(); // Extract the current theme from the context
@@ -26,8 +27,15 @@ const AppContent = () => {
           <ChevronDownIcon className="h-6 w-6 mt-4 animate-bounce" />
         </div>
         
+        <div className="snap-start flex flex-col items-center justify-center h-screen">
+          <div className="w-full h-full p-4 flex-grow">
+            <TradingViewChart theme={theme}  />
+          </div>
+          <ChevronDownIcon className="h-6 w-6 animate-bounce" />
+        </div>
+
         <div className="snap-start h-screen flex items-center justify-center">
-          <TradingViewChart theme={theme}  />
+          <Comments />
         </div>
       </div>
     </div>
