@@ -12,7 +12,7 @@ I was allowed to use React and TailwindCSS
 <br>
 Feature 1: I would have added an all time range in the graph.<br>
 Feature 2: I would have added a bar graph.<br>
-Code Refactoring: I would have spent more time refractoring code<br>
+Code Refactoring: I would have spent more time refractoring the code.<br>
 Testing: I would have done more unit testing.<br>
 Documentation: I would have improved the documentation for this project.<br>
 
